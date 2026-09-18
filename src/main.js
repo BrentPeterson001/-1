@@ -1,43 +1,108 @@
-const books = [
-  { title: "The Great Gatsby", author: "F. Scott Fitzgerald", isBorrowed: false },
-  { title: "1984", author: "George Orwell", isBorrowed: true },
-  { title: "To Kill a Mockingbird", author: "Harper Lee", isBorrowed: false },
-  { title: "The Hobbit", author: "J.R.R. Tolkien", isBorrowed: true }
-];
-
-
-class Book {
-    constructor(title, author, isBorrowed) {
-        this.title = title;
-        this.author = author;
-        this.isBorrowed = isBorrowed;
-    }
-    toggleBorrowStatus() {
-        this.isBorrowed = !this.isBorrowed;
-        return this.isBorrowed;
-    }
+class Enclosure {
 }
 
-class Library {
+class Animal extends Enclosure {
     constructor() {
-        this.books = [];
+        super()
     }
-    addBook(book) {
-        this.books.push(book);
-    }
-    removeBook(title) {
-        const index = this.books.findIndex(b => b.title.toLowerCase() === title.trim().toLowerCase());
-        return this.books.splice(index, 1);
-    }
-    findBookByTitle(title) {
-        const  target = title.trim().toLowerCase();
-        return this.books.find(b => b.title.toLowerCase() === target);
-    }
-    getAvailableBooks() {
-        return this.books.filter(book => !book.isBorrowed);
-    }
-    getStatsByAuthor() {
-        return this.books.filter(b => b.author.toLowerCase() === author.trim().toLowerCase().map(b => b.title));
+    
+    static makeSound = `Издает звук...`;
+
+    feed() {
+        return `Вы покормили`;
     }
 }
-list.innerHTML = books.map(book => `<li>${book.title} - ${book.author} - ${book.isBorrowed}`).join("");
+
+class Mammal extends Animal {
+    #age;
+    constructor(name, age) {
+        super();
+        this.name = name;
+        this.age = age;
+    }
+
+    get age() {
+        return this.#age;
+    }
+
+    set age(value) {
+        if (value < 0) {
+            throw new Error('Возраст не может быть отрицательным');
+        }
+        return this.#age = value;
+    }
+
+    feed(item, q = 1) {
+        if (q < 0) {
+            throw new Error('Количество не может быть отрицательным');
+        }
+        return `${super.feed()} Mammal с помощью: ${item}, ${q} раз/a!`;
+    }
+}
+
+class Bird extends Animal {
+    #age;
+    constructor(name, age) {
+        super();
+        this.name = name;
+        this.age = age;
+    }
+
+    get age() {
+        return this.#age;
+    }
+
+    set age(value) {
+        if (value < 0) {
+            throw new Error('Возраст не может быть отрицательным');
+        }
+        return this.#age = value;
+    }
+
+    feed(item, q = 1) {
+        if (q < 0) {
+            throw new Error('Количество не может быть отрицательным');
+        }
+        return `${super.feed()} Bird с помощью: ${item}, ${q} раз/a!`;
+    }
+}
+
+class Reptile extends Animal {
+    #age;
+    constructor(name, age) {
+        super();
+        this.name = name;
+        this.age = age;
+    }
+
+    get age() {
+        return this.#age;
+    }
+
+    set age(value) {
+        if (value < 0) {
+            throw new Error('Возраст не может быть отрицательным');
+        }
+        return this.#age = value;
+    }
+
+    feed(item, q = 1) {
+        if (q < 0) {
+            throw new Error('Количество не может быть отрицательным');
+        }
+        return `${super.feed()} Reptile с помощью: ${item}, ${q} раз/a!`;
+    }
+}
+
+const mammal = new Mammal('Васян', 1)
+const bird = new Bird()
+const reptile = new Reptile()
+
+console.log(mammal)
+
+console.log(mammal.feed('яблоко'))
+console.log(bird.feed('банан', 2))
+console.log(reptile.feed('мясо', 3))
+
+console.log(Bird.makeSound)
+
